@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement()) // id
+  username  String   @unique //유저아이디
+  email     String   @unique //유저이메일
+  password  String //유저 패스워드 
+  avatar    String? // 유저 아바타 이미지 
+  createdAt DateTime @default(now()) //계정 생성일
+  updatedAt DateTime @updatedAt //유저 수정일 
+}
+
+model Room {
+  roomId    Int      @id @default(autoincrement())
+  createdId Int
+  createdAt DateTime @default(now()) //채팅방 생성일
+  updatedAt DateTime @updatedAt //채팅방 수정일 
+}

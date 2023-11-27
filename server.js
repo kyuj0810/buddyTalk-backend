@@ -1,21 +1,12 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
-
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => 'bebe',
-  },
-};
+import schema from './schema.js';
+// const ApolloServer = require('apollo-server');
+// const ApolloServerPluginLandingPageGraphQLPlayground = require('apollo-server-core');
+// const schema = require('./schema');
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
