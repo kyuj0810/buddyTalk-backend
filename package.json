@@ -2,6 +2,7 @@
   "name": "buddytalk-backend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "dev": "nodemon --exec babel-node server",
     "migrate": "npx prisma migrate dev",

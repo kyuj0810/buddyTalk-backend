@@ -1,9 +1,23 @@
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import schema from './schema.js';
-// const ApolloServer = require('apollo-server');
-// const ApolloServerPluginLandingPageGraphQLPlayground = require('apollo-server-core');
-// const schema = require('./schema');
+
+// export const typeDefs = gql`
+//   type User {
+//     id: Int!
+//     username: String!
+//   }
+
+//   type Query {
+//     users: [User]
+//   }
+// `;
+
+// export const resolvers = {
+//   Query: {
+//     users: () => client.user.findMany(),
+//   },
+// };
 
 const server = new ApolloServer({
   schema,

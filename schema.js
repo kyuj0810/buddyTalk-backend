@@ -1,18 +1,20 @@
 // import { fileURLToPath } from 'url'; // 👈 추가
+import path from 'path';
+import url from 'url';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { loadFilesSync } from '@graphql-tools/load-files';
+import { loadFiles } from '@graphql-tools/load-files';
 import { mergeResolvers, mergeTypeDefs } from '@graphql-tools/merge';
 
-// const __dirname = fileURLToPath(new URL('.', import.meta.url)); // 👈 추가
-// const __filename = fileURLToPath(import.meta.url); // 👈 추가
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const loadedTypes = loadFilesSync(`${__dirname}/**/*.queries.js`);
-const loadedResolvers = loadFilesSync(`${__dirname}/**/*.typeDefs.js`);
+const loadedTypeDefs = await loadFiles(`${__dirname}/**/*.typeDefs.js`);
+const loadedResolvers = await loadFiles(
+  `${__dirname}/**/*.{queries,mutations}.js`
+);
 
-const typeDefs = mergeTypeDefs(loadedTypes);
+const typeDefs = mergeTypeDefs(loadedTypeDefs);
 const resolvers = mergeResolvers(loadedResolvers);
-
-console.log(typeDefs);
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
