@@ -25,6 +25,7 @@
     "@graphql-tools/schema": "^10.0.0",
     "@prisma/client": "^3.5.0-integration-fix-bundlers-broken-require.2",
     "apollo-server": "^3.12.0",
+    "dotenv": "^16.3.1",
     "graphql": "^16.8.0",
     "graphql-tools": "^9.0.0",
     "nodemon": "^3.0.1"

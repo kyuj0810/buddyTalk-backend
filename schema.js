@@ -1,4 +1,3 @@
-// import { fileURLToPath } from 'url'; // 👈 추가
 import path from 'path';
 import url from 'url';
 import { makeExecutableSchema } from '@graphql-tools/schema';
