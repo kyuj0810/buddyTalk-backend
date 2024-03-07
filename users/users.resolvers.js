@@ -7,6 +7,12 @@ export default {
         where: { id },
       }),
     users: () => client.user.findMany(),
+    findUsername:
+      () =>
+      (_, { username }) =>
+        client.user.findFirst({
+          where: { username },
+        }),
   },
   Mutation: {
     createAccount: (_, { username, email, password }) =>
