@@ -7,6 +7,10 @@ export default gql`
   }
 
   type Mutation {
-    editProfile(email: String, password: String): EditProfileResult!
+    editProfile(
+      email: String
+      password: String
+      token: String!
+    ): EditProfileResult!
   }
 `;
