@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 
 export default {
   Mutation: {
-    editProfile: async (_, { email, password: newPassword, token }) => {
+    editProfile: async (_, { email, password: newPassword }, { token }) => {
+      console.log(token);
       const { id } = await jwt.verify(token, process.env.SECRET_KEY);
-
       let uglyPassword = null;
 
       if (newPassword) {
