@@ -4,9 +4,12 @@ import bcrypt from 'bcrypt';
 
 export default {
   Mutation: {
-    editProfile: async (_, { email, password: newPassword }, { token }) => {
-      console.log(token);
-      const { id } = await jwt.verify(token, process.env.SECRET_KEY);
+    editProfile: async (
+      _,
+      { email, password: newPassword },
+      { loggedInUser }
+    ) => {
+      console.log(loggedInUser);
       let uglyPassword = null;
 
       if (newPassword) {
@@ -15,7 +18,7 @@ export default {
 
       const updatedUser = await client.user.update({
         where: {
-          id,
+          id: loggedInUser.id,
         },
         data: {
           email,
