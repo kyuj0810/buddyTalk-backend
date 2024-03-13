@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import schema from './schema.js';
-import { getUser, protectResolver } from './users/users.utils.js';
+import { getUser } from './users/users.utils.js';
 
 const server = new ApolloServer({
   schema,
@@ -10,7 +10,6 @@ const server = new ApolloServer({
     // console.log(req.headers);
     return {
       loggedInUser: await getUser(req.headers.token),
-      protectResolver,
     };
   },
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
