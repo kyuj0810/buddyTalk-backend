@@ -15,12 +15,14 @@ export default {
         }
 
         const uglyPassword = await bcrypt.hash(password, 10);
-        const createUser = client.user.create({
+        const createUser = await client.user.create({
           data: { username, email, password: uglyPassword },
         });
-        if (createUser) {
+        console.log(createUser);
+        if (createUser.id) {
           return { ok: true };
         } else {
+          console.log(false);
           return { ok: false, error: '시스템담당자에게 문의바랍니다.' };
         }
       } catch (e) {
