@@ -11,7 +11,11 @@ export default {
           },
         });
         if (existingUser) {
-          throw new Error('이미 등록된 username 또는 email 입니다.');
+          return {
+            ok: false,
+            error: '이미 등록된 username 또는 email 입니다.',
+          };
+          // throw new Error('이미 등록된 username 또는 email 입니다.');
         }
 
         const uglyPassword = await bcrypt.hash(password, 10);
@@ -22,7 +26,6 @@ export default {
         if (createUser.id) {
           return { ok: true };
         } else {
-          console.log(false);
           return { ok: false, error: '시스템담당자에게 문의바랍니다.' };
         }
       } catch (e) {
