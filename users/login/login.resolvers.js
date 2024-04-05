@@ -10,7 +10,7 @@ export default {
       if (!user) {
         return {
           ok: false,
-          error: 'User not found.',
+          error: '유효한 유저가 아닙니다.',
         };
       }
 
@@ -18,7 +18,7 @@ export default {
       if (!passwordOK) {
         return {
           ok: false,
-          error: 'Incorrect password.',
+          error: '패스워드가 정확하지 않습니다',
         };
       }
 

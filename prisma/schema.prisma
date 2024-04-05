@@ -11,18 +11,57 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement()) // id
-  username  String   @unique //유저아이디
-  email     String   @unique //유저이메일
-  password  String //유저 패스워드 
-  avatar    String? // 유저 아바타 이미지 
+  id            Int             @id @default(autoincrement()) // id
+  username      String          @unique //유저아이디
+  email         String          @unique //유저이메일
+  password      String //유저 패스워드 
+  avatar        String? // 유저 아바타 이미지 
+  createdAt     DateTime        @default(now()) //계정 생성일
+  updatedAt     DateTime        @updatedAt //유저 수정일 
+  myRoutine     UserRoutine[]
+  routine       Routine[]
+  routineDetail RoutineDetail[]
+}
+
+model UserRoutine {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  routine   Routine? @relation(fields: [routineId], references: [id])
+  userId    Int
+  routineId Int?
+  status    String?
+  createdAt DateTime @default(now()) //계정 생성일
+}
+
+model Routine {
+  id            Int             @id @default(autoincrement())
+  title         String
+  hashtags      Hashtag[]
+  user          User?           @relation(fields: [userId], references: [id])
+  userId        Int?
+  createdAt     DateTime        @default(now()) //계정 생성일
+  updatedAt     DateTime        @updatedAt //유저 수정일 
+  routineDetail RoutineDetail[]
+  userRoutine   UserRoutine[]
+}
+
+model RoutineDetail {
+  id        Int      @id @default(autoincrement())
+  content   String
+  time      String?
+  user      User     @relation(fields: [userId], references: [id])
+  routine   Routine  @relation(fields: [routineId], references: [id])
+  userId    Int
+  routineId Int
   createdAt DateTime @default(now()) //계정 생성일
   updatedAt DateTime @updatedAt //유저 수정일 
 }
 
-model Room {
-  roomId    Int      @id @default(autoincrement())
-  createdId Int
-  createdAt DateTime @default(now()) //채팅방 생성일
-  updatedAt DateTime @updatedAt //채팅방 수정일 
+model Hashtag {
+  id        Int      @id @default(autoincrement())
+  hashtag   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  routine   Routine? @relation(fields: [routineId], references: [id])
+  routineId Int?
 }

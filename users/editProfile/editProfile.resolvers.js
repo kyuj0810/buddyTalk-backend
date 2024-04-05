@@ -28,7 +28,7 @@ const resolverFn = async (
   } else {
     return {
       ok: false,
-      error: 'Could not update profile.',
+      error: '프로필을 변경할 수 없습니다.',
     };
   }
 };
