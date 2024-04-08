@@ -21,10 +21,16 @@ export const getUser = async (token) => {
 export function protectedResolver(ourResolver) {
   return function (root, args, context, info) {
     if (!context.loggedInUser) {
-      return {
-        ok: false,
-        error: '로그인을 해주시길 바랍니다.',
-      };
+      // console.log(info.operation.operation);
+      const query = info.operation.operation === 'query';
+      if (query) {
+        return null;
+      } else {
+        return {
+          ok: false,
+          error: '로그인을 해주시길 바랍니다.',
+        };
+      }
     }
     return ourResolver(root, args, context, info);
   };
