@@ -29,13 +29,14 @@ model UserRoutine {
   routine   Routine? @relation(fields: [routineId], references: [id])
   userId    Int
   routineId Int
-  status    String?
+  status    String? //루틴 완료 여부
   createdAt DateTime @default(now()) //계정 생성일
 }
 
 model Routine {
   id            Int             @id @default(autoincrement())
   title         String
+  days          Int             @default(7) //루틴일
   hashtags      Hashtag[]
   user          User?           @relation(fields: [userId], references: [id])
   userId        Int

@@ -1,10 +1,10 @@
 import client from '../../client.js';
 import { protectedResolver } from '../../users/users.utils.js';
 
-const resolverFn = async (_, { title }, { loggedInUser }) => {
+const resolverFn = async (_, { title, days, hashtags }, { loggedInUser }) => {
   try {
     const createRoutine = await client.routine.create({
-      data: { title, userId: loggedInUser.id },
+      data: { title, days, hashtags, userId: loggedInUser.id },
     });
     console.log(createRoutine);
     if (createRoutine.id) {
