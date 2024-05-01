@@ -22,7 +22,7 @@ export default {
         const createUser = await client.user.create({
           data: { username, email, password: uglyPassword },
         });
-        console.log(createUser);
+
         if (createUser.id) {
           return { ok: true };
         } else {

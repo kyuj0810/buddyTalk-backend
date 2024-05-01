@@ -2,13 +2,19 @@ import client from '../../client.js';
 import { protectedResolver } from '../../users/users.utils.js';
 
 const resolverFn = async (_, { title, days, hashtags }, { loggedInUser }) => {
-  console.log(loggedInUser);
   try {
-    console.log(loggedInUser.id);
+    // console.log(hashtags);
+
     const createRoutine = await client.routine.create({
-      data: { title, days, hashtags, userId: loggedInUser.id },
+      data: { title, days, userId: loggedInUser.id },
     });
-    console.log(createRoutine);
+
+    if (createRoutine.id) {
+      await client.hashtag.create({
+        data: { hashtag: hashtags, routineId: createRoutine.id },
+      });
+    }
+
     if (createRoutine.id) {
       return { ok: true };
     } else {
